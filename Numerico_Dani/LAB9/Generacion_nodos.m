@@ -1,0 +1,19 @@
+% Esto es trabajando con n nodos (la clase de Newton) y no con n+1
+% (Lagrange)
+a = 0; b = 12;
+
+% Cambio de variable de [-1,1] a [a,b]
+u = @(t) 0.5*(t*(b-a) + b+a);
+n = 45; % Numero de nodos
+
+% Nodos equiespaciados en [-1,1]
+t2 = -1:2/(n-1):1;
+
+% Nodos de Chebyshev en [-1,1]
+t = cos(0.5*pi*((2*(1:n)-1)/n));
+s = u(t);
+x = a:(b-1)/(10000):b;
+f = @(x) sin(7*x);
+p = poliNewton(f,s,x);
+
+plot(x,p);hold on;plot(x,f(x),'k');plot(s,f(s),'*r')
